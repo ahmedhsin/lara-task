@@ -41,7 +41,7 @@
                     <td>{{$user['role']}}</td>
                     <td>{{$user['created_at']}}</td>
                     <td class="d-md-flex gap-2">
-                        <button class="btn btn-outline-primary">Send Message</button>
+                        <a href="/notifications/create?id={{$user['id']}}" class="btn btn-outline-primary">Send Message</a >
                         <form method="post" class="m-0 p-0" action="/users/{{$user['id']}}" onsubmit="return confirm('are you sure you want to delete?');">
                             @csrf
                             <input  type="hidden" name="_method" value="DELETE">

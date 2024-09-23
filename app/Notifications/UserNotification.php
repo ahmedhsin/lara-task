@@ -14,10 +14,12 @@ class UserNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    private $ticket_id;
-    public function __construct($ticket_id)
+    private $message;
+    private $type;
+    public function __construct($message, $type)
     {
-        $this->ticket_id = $ticket_id;
+        $this->message = $message;
+        $this->type = $type;
     }
 
     /**
@@ -43,7 +45,8 @@ class UserNotification extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'ticket_id' => $this->ticket_id,
+            'message' => $this->message,
+            'type' => $this->type
         ];
     }
 
@@ -55,7 +58,8 @@ class UserNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'message' => $this->message,
+            'type' => $this->type,
         ];
     }
 }

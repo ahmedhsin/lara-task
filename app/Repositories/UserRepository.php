@@ -34,4 +34,11 @@ class UserRepository
         $user = User::query()->where('id','=',$id);
         $user->delete();
     }
+
+    public function getOne($id)
+    {
+        $user = User::query()->where('id','=',$id)->first();
+        $user = UserResource::make($user);
+        return Messages::success($user, '');
+    }
 }

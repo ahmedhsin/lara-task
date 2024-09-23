@@ -2,10 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Action\SendAnswerNotification;
 use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use App\Notifications\UserNotification;
 use App\Services\Messages;
+use Illuminate\Support\Facades\Notification;
 
 class CommentRepository
 {
@@ -21,7 +23,7 @@ class CommentRepository
         $data['user_id'] = auth()->user()->id;
         $comment = Comment::query()->create($data);
         $comment = CommentResource::make($comment);
-        auth()->user()->notify(new UserNotification($data['ticket_id']));
+        SendAnswerNotification::send($data);
         return Messages::success($comment, 'Comment Created Successfully');
     }
 }

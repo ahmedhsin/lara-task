@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use function Symfony\Component\Translation\t;
 
@@ -14,6 +15,7 @@ class UserBaseController extends Controller
     public function __construct(UserRepository $repo)
     {
         $this->users = $repo;
+        $this->middleware('is.admin');
     }
     public function index()
     {
@@ -24,9 +26,18 @@ class UserBaseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function show(string $id)
     {
         //
+    }
+
+    public function download(string $id)
+    {
+        $pdf = PDF::loadView('Dashboard.pdf',[
+            "user" => $this->users->getOne($id)['data']
+        ]);
+
+        return $pdf->download('user-'.$id.'.pdf');
     }
 
     /**

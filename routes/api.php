@@ -53,4 +53,18 @@ Route::resource('users', \App\Http\Controllers\User\UserApiController::class)
         'index' => 'api.users.index',
         'destroy' => 'api.users.destroy',
     ]);
+
+Route::get('users/download/{id}', [\App\Http\Controllers\User\UserBaseController::class, 'download']);
+
 /************************End of Comments************************/
+
+/************************Start Of Notif**********************/
+Route::resource('notifications', \App\Http\Controllers\Notification\NotificationApiController::class)
+    ->only(['index', 'create', 'store'])
+    ->names([
+        'index' => 'api.notifications.index',
+        'create' => 'api.notifications.create',
+        'store' => 'api.notifications.store'
+    ]);
+Route::post('notifications/read', [\App\Http\Controllers\Notification\NotificationApiController::class, 'read']);
+/************************end Of Notif**********************/

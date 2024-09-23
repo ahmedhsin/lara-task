@@ -12,7 +12,7 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm ">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Ticket System</a>
+        <a class="navbar-brand" href="/">Ticket System</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,11 +35,12 @@
                 @auth()
                     @if(Auth::user()->role == 'admin')
                         <li class="nav-item">
-                        <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/users">Users</a>
                         </li>
-                        </li>
                     @endif
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/notifications">Notifications</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/tickets">Tickets</a>
                         </li>
